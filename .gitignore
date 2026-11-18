@@ -1,1 +1,4 @@
+# Build output from main.ts runs
 out/
+# Editor and OS clutter
+.DS_Store

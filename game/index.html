@@ -3,16 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Block Dodger</title>
-<style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #11141b; }
-  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-  /* Read aloud, never shown: the status line screen readers announce. */
-  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-</style>
+<title>Solmar Bay — an open-world crime game</title>
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
-<canvas id="game" aria-label="Block Dodger: move the paddle left and right to dodge falling blocks and catch coins"></canvas>
+<canvas id="game" width="1280" height="720" aria-label="Solmar Bay: drive, steal cars and run jobs across an open coastal city"></canvas>
+
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div id="health"><span id="health-fill"></span><b id="health-num">100</b></div>
+    <div id="money">$150</div>
+    <div id="stars" aria-label="wanted level">☆☆☆☆☆</div>
+    <div id="clock">08:00</div>
+    <div id="speed"></div>
+  </div>
+  <div id="objective">
+    <b id="objective-title">1. Getaway Wheels</b>
+    <span id="objective-text"></span>
+    <span id="objective-dist"></span>
+  </div>
+  <div id="subtitle"></div>
+  <div id="banner"></div>
+  <div id="hint"></div>
+  <div id="mapwrap">
+    <canvas id="minimap" width="200" height="150" aria-label="minimap of Solmar Bay"></canvas>
+    <span>SOLMAR BAY</span>
+  </div>
+</div>
+
+<div id="start-screen" class="screen">
+  <div class="panel">
+    <h1>SOLMAR BAY</h1>
+    <p class="tag">A sun-soaked coastal city. One driver with nothing to lose.</p>
+    <p>Milo Reyes just got out and owes the wrong people money. His fixer Rook has five jobs
+    lined up — steal the getaway car, run the courier route, lay low, repo a coupe, and then
+    the Bay Bank job. Drive it, shoot it, or walk away from it. The city is yours either way.</p>
+    <div class="controls">
+      <span><b>WASD</b> walk / drive</span>
+      <span><b>Mouse</b> aim — <b>click</b> shoot</span>
+      <span><b>E</b> steal / leave car</span>
+      <span><b>F</b> punch</span>
+      <span><b>Space</b> handbrake</span>
+      <span><b>M</b> mission log</span>
+      <span><b>P</b> pause</span>
+      <span><b>N</b> mute</span>
+    </div>
+    <button id="start-btn">Start the story</button>
+    <button id="load-btn" class="ghost">Continue saved game</button>
+  </div>
+</div>
+
+<div id="pause-screen" class="screen hidden">
+  <div class="panel">
+    <h1>PAUSED</h1>
+    <p>The city waits for you, Milo.</p>
+    <button id="resume-btn">Resume</button>
+    <button id="save-btn">Save game</button>
+    <button id="pause-load-btn" class="ghost">Load saved game</button>
+    <button id="restart-btn" class="ghost">Restart the story</button>
+    <button id="mute-btn" class="ghost">Mute (N)</button>
+  </div>
+</div>
+
+<div id="over-screen" class="screen hidden">
+  <div class="panel">
+    <h1 id="over-title">WASTED</h1>
+    <p id="over-stats"></p>
+    <button id="again-btn">Play again</button>
+  </div>
+</div>
+
+<div id="log" class="screen hidden">
+  <div class="panel">
+    <h1>MISSION LOG</h1>
+    <div id="log-list"></div>
+    <button id="log-close-btn">Close (M)</button>
+  </div>
+</div>
+
 <p id="status" role="status" aria-live="polite"></p>
 <script type="module" src="./src/main.js"></script>
 </body>
